@@ -1,0 +1,41 @@
+.grid {
+  display: grid;
+  grid-template-columns: $col1 $col2 $col3 $col4 $col5;
+  grid-gap: $gap;
+  grid-auto-columns: $auto-columns;
+  grid-auto-rows: $auto-rows;
+
+  .item {
+    background-color: red;
+
+    &.n1,
+    &.n3 {
+      grid-row-start: 1;
+      grid-row-end: 3;
+    }
+
+    &.n2 {
+      grid-row-end: 2;
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+
+    &.n3 {
+      grid-row-end: 4;
+    }
+
+    &.n5 {
+      background-color: $yellow;
+    }
+
+    &.n8 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    &.10 {
+      grid-column-start: 3;
+      grid-column-end: 5;
+    }
+  }
+}
