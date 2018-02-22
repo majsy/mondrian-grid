@@ -1,41 +1,146 @@
+@import '../base/mixins';
+@import '../base/variables';
+
+$gap-lg: 10px;
+$gap-sm: 6px;
+$auto-columns: 100px;
+$auto-rows-lg: 200px;
+$auto-rows-md: 150px;
+$auto-rows-sm: 100px;
+
+$col1: 0.5fr;
+$col2: 1.5fr;
+$col3: 1.2fr;
+$col4: 1fr;
+$col5: 0.8fr;
+
 .grid {
   display: grid;
   grid-template-columns: $col1 $col2 $col3 $col4 $col5;
-  grid-gap: $gap;
+  grid-gap: $gap-lg;
   grid-auto-columns: $auto-columns;
-  grid-auto-rows: $auto-rows;
+  grid-auto-rows: $auto-rows-lg;
+
+  @include breakpoint(tablet) {
+    grid-auto-rows: $auto-rows-md;
+    grid-gap: $gap-sm;
+  }
+
+  @include breakpoint(mobile) {
+    grid-auto-rows: $auto-rows-sm;
+  }
 
   .item {
-    background-color: red;
+    background-color: $purple;
 
-    &.n1,
-    &.n3 {
+    // grid items with nested items
+    &.n2,
+    &.n3,
+    &.n4,
+    &.n12 {
+      display: grid;
+      grid-gap: $gap-lg;
+      background-color: $white;
+
+      .inner {
+        background: $purlpe-darker;
+      }
+
+      @include breakpoint(tablet) {
+        grid-gap: $gap-sm;
+      }
+    }
+
+    &.n1 {
       grid-row-start: 1;
-      grid-row-end: 3;
+      grid-row-end: 4;
     }
 
     &.n2 {
       grid-row-end: 2;
       grid-column-start: 2;
       grid-column-end: 4;
+      grid-template-rows: 2fr 1fr;
+
+      .inner {
+        &:first-child {
+          background-color: $purple;
+        }
+      }
     }
 
     &.n3 {
-      grid-row-end: 4;
+      grid-row-start: 3;
+      grid-row-end: 6;
+
+      .inner {
+        &:first-child {
+          display: grid;
+          grid-gap: $gap-lg;
+          background-color: $white;
+          grid-template-columns: 4fr 1fr;
+
+          @include breakpoint(tablet) {
+            grid-gap: $gap-sm;
+          }
+          
+          .inner-2nd {
+            background-color: $coral-darker;
+
+            &:last-child {
+              background-color: $peach;
+            }
+          }
+        }
+      }
+    }
+
+    &.n4 {
+      grid-template-columns: 2fr 1fr;
+
+      .inner {
+        &:first-child {
+          background-color: $purple;
+        }
+      }
     }
 
     &.n5 {
-      background-color: $yellow;
+      background-color: $coral-darker;
+      grid-row-start: 1;
+      grid-row-end: 4;
+    }
+
+    &.n6 {
+      grid-row-start: 2;
+      grid-row-end: 4;
     }
 
     &.n8 {
-      grid-column-start: 1;
-      grid-column-end: 3;
-    }
-
-    &.10 {
       grid-column-start: 3;
       grid-column-end: 5;
+    }
+
+    &.n9 {
+      grid-row-start: 2;
+      grid-row-end: 5;
+    }
+
+    &.n10 {
+      grid-row-start: 4;
+      grid-row-end: 6;
+    }
+
+    &.n12 {
+      grid-column-start: 4;
+      grid-column-end: 6;
+      grid-template-columns: 1fr 2fr;
+
+      .inner {
+        &:last-child {
+          background-color: $coral;
+        }
+      }
     }
   }
 }
